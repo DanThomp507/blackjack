@@ -143,7 +143,6 @@ const determineGameResult = (state: GameState): GameResult => {
 
 // Player Actions
 const playerStands = (state: GameState): GameState => {
-  // return newState;
   let newState = { ...state };
 
   // Dealer takes cards until their score is 17 or higher
@@ -220,7 +219,7 @@ const Game = (): JSX.Element => {
         </div>
       )}
       {state.turn === 'dealer_turn' &&
-      determineGameResult(state) != 'no_result' ? (
+      determineGameResult(state) !== 'no_result' ? (
         <p>{determineGameResult(state)}</p>
       ) : (
         <p>{state.turn}</p>
