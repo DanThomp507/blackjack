@@ -157,10 +157,13 @@ const playerStands = (state: GameState): GameState => {
   const dealerScore = calculateHandScore(newState.dealerHand);
   let gameResult;
 
+  // if dealer busts, or player score is > dealer score, player wins
   if (dealerScore > 21 || playerScore > dealerScore) {
     gameResult = 'player_win';
+    // if player score is less than dealer score, dealer wins
   } else if (playerScore < dealerScore) {
     gameResult = 'dealer_win';
+    // otherwise it's a draw
   } else {
     gameResult = 'draw';
   }
