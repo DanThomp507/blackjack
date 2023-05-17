@@ -155,7 +155,7 @@ const playerStands = (state: GameState): GameState => {
   // Determine the game result
   const playerScore = calculateHandScore(newState.playerHand);
   const dealerScore = calculateHandScore(newState.dealerHand);
-  let gameResult: GameResult;
+  let gameResult;
 
   if (dealerScore > 21 || playerScore > dealerScore) {
     gameResult = 'player_win';
@@ -165,7 +165,8 @@ const playerStands = (state: GameState): GameState => {
     gameResult = 'draw';
   }
 
-  newState.turn = 'dealer_turn'; // Update the turn to 'dealer_turn'
+  // Update the turn to 'dealer_turn'
+  newState.turn = 'dealer_turn';
 
   return newState;
 };

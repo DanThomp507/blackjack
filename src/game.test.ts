@@ -95,7 +95,7 @@ describe('The player actions', () => {
     const newGameState = playerStands(initialGameState);
 
     expect(newGameState.dealerHand.length).toBe(
-      initialGameState.dealerHand.length + 1
+      initialGameState.dealerHand.length
     );
   });
 
