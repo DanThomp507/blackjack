@@ -146,7 +146,7 @@ const playerStands = (state: GameState): GameState => {
   let newState = { ...state };
 
   // Dealer takes cards until their score is 17 or higher
-  while (calculateHandScore(newState.dealerHand) <= 16) {
+  while (calculateHandScore(newState.dealerHand) < 17) {
     const { card, remaining } = takeCard(newState.cardDeck);
     newState.cardDeck = remaining;
     newState.dealerHand.push(card);
