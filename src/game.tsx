@@ -11,7 +11,7 @@ import {
 
 //UI Elements
 const CardBackImage = () => (
-  <img src={process.env.PUBLIC_URL + `/SVG-cards/png/1x/back.png`} />
+  <img alt='card' src={process.env.PUBLIC_URL + `/SVG-cards/png/1x/back.png`} />
 );
 
 const CardImage = ({ suit, rank }: Card) => {
@@ -19,6 +19,7 @@ const CardImage = ({ suit, rank }: Card) => {
   return (
     <img
       key={`/SVG-cards/png/1x/${suit.slice(0, -1)}_${card}.png`}
+      alt='card'
       src={
         process.env.PUBLIC_URL +
         `/SVG-cards/png/1x/${suit.slice(0, -1)}_${card}.png`
@@ -27,7 +28,7 @@ const CardImage = ({ suit, rank }: Card) => {
   );
 };
 
-//Setup
+// Setup
 const newCardDeck = (): CardDeck =>
   Object.values(CardSuit)
     .map((suit) =>
@@ -173,7 +174,6 @@ const playerStands = (state: GameState): GameState => {
 
   return newState;
 };
-
 const playerHits = (state: GameState): GameState => {
   const { card, remaining } = takeCard(state.cardDeck);
   return {
