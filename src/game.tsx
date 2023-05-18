@@ -144,36 +144,25 @@ const determineGameResult = (state: GameState): GameResult => {
 
 // Player Actions
 const playerStands = (state: GameState): GameState => {
-  let newState = { ...state };
+  const dealerHand = [...state.dealerHand];
+  let cardDeck = [...state.cardDeck];
 
   // Dealer takes cards until their score is 17 or higher
-  while (calculateHandScore(newState.dealerHand) < 17) {
-    const { card, remaining } = takeCard(newState.cardDeck);
-    newState.cardDeck = remaining;
-    newState.dealerHand.push(card);
+  while (calculateHandScore(dealerHand) <= 16) {
+    const { card, remaining } = takeCard(cardDeck);
+    dealerHand.push(card);
+    cardDeck = remaining;
   }
 
-  // Determine the game result
-  const playerScore = calculateHandScore(newState.playerHand);
-  const dealerScore = calculateHandScore(newState.dealerHand);
-  let gameResult;
-
-  // if dealer busts, or player score is > dealer score, player wins
-  if (dealerScore > 21 || playerScore > dealerScore) {
-    gameResult = 'player_win';
-    // if player score is less than dealer score, dealer wins
-  } else if (playerScore < dealerScore) {
-    gameResult = 'dealer_win';
-    // otherwise it's a draw
-  } else {
-    gameResult = 'draw';
-  }
-
-  // Update the turn to 'dealer_turn'
-  newState.turn = 'dealer_turn';
-
-  return newState;
+  // Create a new state object with updated properties
+  return {
+    ...state,
+    dealerHand,
+    cardDeck,
+    turn: 'dealer_turn',
+  };
 };
+
 const playerHits = (state: GameState): GameState => {
   const { card, remaining } = takeCard(state.cardDeck);
   return {
